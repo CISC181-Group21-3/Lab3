@@ -23,7 +23,10 @@ public class CardTest {
 	@Test
 	public void Card_Create_Test() {
 		Card c = new Card(eSuit.CLUBS, eRank.EIGHT);
+		
 		assertNotNull(c);
+		//assertTrue(c instranceof Card);
+		
 		assertEquals(eSuit.CLUBS, c.geteSuit());
 		assertEquals(eRank.EIGHT, c.geteRank());
 		assertFalse(c.isWild());

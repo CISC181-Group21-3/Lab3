@@ -249,6 +249,36 @@ public class HandPoker extends Hand implements Comparable {
 		ArrayList<HandPoker> CombinationHands = new ArrayList<HandPoker>();
 		Rule rle = this.getGP().getRle();
 		
+		int iMinPlayerCards = rle.getPlayerCardsMin();
+		int iMaxPlayerCards = rle.getPlayerCardsMax();
+		int iMinCommonCards = rle.getCommunityCardsMin();
+		int iMaxCommonCards = rle.getCommunityCardsMax();
+		
+		for (int i=0;i<(iMaxPlayerCards - iMinPlayerCards +1); i++) {
+			
+			Iterator<int[]> iterPlayer = CombinatoricsUtils.combinationsIterator(iMaxPlayerCards,  i + iMinPlayerCards);
+			while (iterPlayer.hasNext()) {
+				
+				final int[] cmbPlayer = iterPlayer.next();
+				Iterator<int[]> iterCommon = CombinatoricsUtils.combinationsIterator(iMaxCommonCards, iMaxCommonCards - i); 
+				while (iterCommon.hasNext()) {
+					ArrayList<Card> cards = new ArrayList<Card>();
+					final int[] cmbCommon = iterCommon.next();
+					
+					for(int iPlayerCard : cmbPlayer) {
+						cards.add(this.getCards().get(iPlayerCard));
+					}
+					for(int iCommonCard : cmbCommon) {
+						cards.add(this.getGP().getCommonCards().get(iCommonCard));
+					}
+					HandPoker hp = new HandPoker(this.getPlayer(), this.getGP(), cards);
+					CombinationHands.add(hp);
+					}
+				}
+			}
+		if (this.getGP().getRle().getPossibleHandCombinations()!= CombinationHands.size()) {
+			throw new HandException(this);
+		}
 		//FIXME: Complete this method.  It's a tough one!
 
 		return CombinationHands;
