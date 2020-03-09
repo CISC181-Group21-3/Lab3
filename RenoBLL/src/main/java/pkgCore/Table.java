@@ -55,7 +55,8 @@ public class Table {
 	 */
 	public void SetTablePlayers(ArrayList<Player> Players)
 	{
-		
+		TablePlayers.removeAll(Players);
+		TablePlayers.addAll(Players);
 		//FIXME: clear the table and add all the players.
 	}
 	
@@ -69,7 +70,7 @@ public class Table {
 	 */
 	public void AddPlayerToTable(Player player)
 	{
-		this.AddPlayerToTable(player);
+		this.TablePlayers.add(player);
 	}
 	
 	/**
