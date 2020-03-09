@@ -279,7 +279,6 @@ public class HandPoker extends Hand implements Comparable {
 		if (this.getGP().getRle().getPossibleHandCombinations()!= CombinationHands.size()) {
 			throw new HandException(this);
 		}
-		//FIXME: Complete this method.  It's a tough one!
 
 		return CombinationHands;
 	}
